@@ -3,6 +3,8 @@
 
 // render
 frappe.listview_settings["Sales Invoice"] = {
+	has_indicator_for_draft: true,
+	has_indicator_for_cancelled: true,
 	add_fields: [
 		"customer",
 		"customer_name",
@@ -15,17 +17,18 @@ frappe.listview_settings["Sales Invoice"] = {
 	],
 	get_indicator: function (doc) {
 		const status_colors = {
-			Draft: "red",
+			Draft: "blue",
 			Unpaid: "orange",
 			Paid: "green",
 			Return: "gray",
-			"Credit Note Issued": "gray",
-			"Unpaid and Discounted": "orange",
-			"Partly Paid and Discounted": "yellow",
-			"Overdue and Discounted": "red",
+			"Credit Note Issued": "cyan",
+			"Unpaid and Discounted": "amber",
+			"Partly Paid and Discounted": "light-blue",
+			"Overdue and Discounted": "pink",
 			Overdue: "red",
 			"Partly Paid": "yellow",
-			"Internal Transfer": "darkgrey",
+			"Internal Transfer": "purple",
+			Cancelled: "darkgrey",
 		};
 
 		if (doc.status === "Credit Note Issued" && flt(doc.outstanding_amount) === 0) {
